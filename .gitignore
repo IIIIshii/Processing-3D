@@ -1,5 +1,6 @@
 examples
 libraries
-modes
+modes/PythonMode
+Matrix2
 templates
 tools
