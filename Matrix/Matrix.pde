@@ -87,6 +87,13 @@ class drawfromCam {
   
   //面を塗る
   void drawSurface(float[] Pos0, float[] Pos1, float[] Pos2, float[] Pos3) {
+    float[] Draw1, Draw2, Draw3, Draw4;
+    Draw1 = ChangeLocation(Pos0);
+    Draw2 = ChangeLocation(Pos1);
+    Draw3 = ChangeLocation(Pos2);
+    Draw4 = ChangeLocation(Pos3);
+    fill(#ff00ff,125);
+    quad(Draw1[0], Draw1[1], Draw2[0], Draw2[1], Draw3[0], Draw3[1], Draw4[0], Draw4[1]);
     return;
   }
   
@@ -113,6 +120,13 @@ class drawfromCam {
       drawline(dots[6], dots[7]);
       drawline(dots[6], dots[2]);
       drawline(dots[6], dots[4]);
+      
+      
+      //面を塗る
+      drawSurface(dots[0], dots[1], dots[3], dots[2]);
+      drawSurface(dots[4], dots[5], dots[7], dots[6]);
+      drawSurface(dots[4], dots[5], dots[1], dots[0]);
+      
     }
     /*for(int i = 0; i < 8; i++) {
       for(int j = i; j < 8; j++) {
