@@ -12,7 +12,8 @@ float rotv = 0.02f;
 //スクリーンは左上原点なのでdrawfromCameraで中心原点にする(y軸の向きは反転してるけどワールド座標系をそれに合わせることで対応)
 //ワールド座標系は立方体の中心が原点になるようにする
 
-//多次元配列って初期化しない状態で0入ってんの？
+
+color tes = color(#000000, 125);
 
 
 //カメラ視点からの描画を担う
@@ -47,6 +48,10 @@ class drawfromCam {
     PosReturn[0] = (l * Pos[0] / (r - Pos[2])) * 300 / (w / 2) + 300;
     PosReturn[1] = (l * Pos[1] / (r - Pos[2])) * 300 / (h / 2) + 300;
     
+    //PosReturn[0] = (l * (Pos[2] * sin(theta) - Pos[0] * cos(theta))) / (cos(theta) * (cos(theta) + sin(theta)) * (r - Pos[0] * cos(gamma) * sin(theta) + Pos[1] * sin(gamma) - Pos[2] * cos(gamma) * cos(theta)));
+    //PosReturn[0] = PosReturn[0] * 300 / (w / 2) + 300;
+    //PosReturn[1] = 1 / (cos(gamma) + l * sin(gamma));
+    
     return PosReturn;
   }
   
@@ -56,7 +61,7 @@ class drawfromCam {
   void drawdot(float[] Pos) {
     float[] Draw;
     Draw = ChangeLocation(Pos);
-    color(#00ffff);
+    color(#0000ff);
     fill(#00ffff);
     ellipse(Draw[0], Draw[1], 10, 10);
     return;
@@ -65,7 +70,7 @@ class drawfromCam {
   void drawdotPlus(float[] Pos) {
     float[] Draw;
     Draw = ChangeLocation(Pos);
-    color(#ff0000);
+    //color(#ff0000);
     fill(#ff0000);
     ellipse(Draw[0], Draw[1], 10, 10);
     return;
@@ -86,7 +91,14 @@ class drawfromCam {
   }
   
   //面を塗る
-  void drawSurface(float[] Pos0, float[] Pos1, float[] Pos2, float[] Pos3) {
+  void drawSurface(float[] Pos0, float[] Pos1, float[] Pos2, float[] Pos3, color c) {
+    float[] Draw1, Draw2, Draw3, Draw4;
+    Draw1 = ChangeLocation(Pos0);
+    Draw2 = ChangeLocation(Pos1);
+    Draw3 = ChangeLocation(Pos2);
+    Draw4 = ChangeLocation(Pos3);
+    fill(c,125);
+    quad(Draw1[0], Draw1[1], Draw2[0], Draw2[1], Draw3[0], Draw3[1], Draw4[0], Draw4[1]);
     return;
   }
   
@@ -113,62 +125,17 @@ class drawfromCam {
       drawline(dots[6], dots[7]);
       drawline(dots[6], dots[2]);
       drawline(dots[6], dots[4]);
-    }
-    /*for(int i = 0; i < 8; i++) {
-      for(int j = i; j < 8; j++) {
-        float[] Pos0 = new float[] {px[i], py[i], pz[i], 1};
-        float[] Pos1 = new float[] {px[j], py[j], pz[j], 1};
-        drawline(Pos0, Pos1);
-      }
-    }*/
-    
-    
-    /*
-    //廃棄物
-    
-    
-    //線を描く
-    //明らかに様子がおかしい
-    //ローカル座標系への変換をミスってそう
-    float[] Pos0 = new float[] {px[0], py[0], pz[0], 1};
-    float[] Pos1 = new float[] {px[1], py[1], pz[1], 1};
-    drawline(Pos0, Pos1);
-    Pos0 = new float[] {px[0], py[0], pz[0], 1};
-    Pos1 = new float[] {px[2], py[2], pz[2], 1};
-    drawline(Pos0, Pos1);
-    Pos0 = new float[] {px[0], py[0], pz[0], 1};  //4
-    Pos1 = new float[] {px[4], py[4], pz[4], 1};  //1
-    drawline(Pos0, Pos1);
-    Pos0 = new float[] {px[3], py[3], pz[3], 1};
-    Pos1 = new float[] {px[1], py[1], pz[1], 1};
-    drawline(Pos0, Pos1);
-    Pos0 = new float[] {px[3], py[3], pz[3], 1};
-    Pos1 = new float[] {px[2], py[2], pz[2], 1};
-    drawline(Pos0, Pos1);
-    Pos0 = new float[] {px[3], py[3], pz[3], 1};
-    Pos1 = new float[] {px[7], py[7], pz[7], 1};  //7
-    drawline(Pos0, Pos1);
-    Pos0 = new float[] {px[5], py[5], pz[5], 1};
-    Pos1 = new float[] {px[7], py[7], pz[7], 1};
-    drawline(Pos0, Pos1);
-    Pos0 = new float[] {px[5], py[5], pz[5], 1};  //0
-    Pos1 = new float[] {px[1], py[1], pz[1], 1};  //5
-    drawline(Pos0, Pos1);
-    Pos0 = new float[] {px[5], py[5], pz[5], 1};
-    Pos1 = new float[] {px[4], py[4], pz[4], 1};
-    drawline(Pos0, Pos1);
-    Pos0 = new float[] {px[6], py[6], pz[6], 1};
-    Pos1 = new float[] {px[7], py[7], pz[7], 1};
-    drawline(Pos0, Pos1);
-    Pos0 = new float[] {px[6], py[6], pz[6], 1};
-    Pos1 = new float[] {px[4], py[4], pz[4], 1};
-    drawline(Pos0, Pos1);
-    Pos0 = new float[] {px[6], py[6], pz[6], 1};  //6
-    Pos1 = new float[] {px[2], py[2], pz[2], 1};
-    drawline(Pos0, Pos1);
+      
+      
+      //面を塗る
+      drawSurface(dots[0], dots[1], dots[3], dots[2], #00ff00);
+      drawSurface(dots[4], dots[5], dots[7], dots[6], #00ffff);
+      drawSurface(dots[4], dots[5], dots[1], dots[0], #ffffff);
+      drawSurface(dots[2], dots[3], dots[7], dots[6], #0000ff);
+      drawSurface(dots[0], dots[2], dots[6], dots[4], #ff0000);
+      drawSurface(dots[1], dots[3], dots[7], dots[5], #ff00ff);
+      
   }
-  
-  */
 }
 
 //1ならX軸,2ならY軸,3ならZ軸、負なら逆回転
@@ -206,57 +173,12 @@ void RotateBox(int rot) {
       dots[i][1] = RetPos[1];
       dots[i][2] = RetPos[2];
     }
-    /*
-    //廃棄物
-    
-    
-    float[] Pos = {px[i], py[i], pz[i], 1};
-    if(rot == 1) {
-      Pos = RotateX(Pos, 0.01f);
-      px[i] = Pos[0];
-      py[i] = Pos[1];
-      pz[i] = Pos[2];
-    } else if(rot == -1) {
-      Pos = RotateX(Pos, -0.01f);
-      px[i] = Pos[0];
-      py[i] = Pos[1];
-      pz[i] = Pos[2];
-    } else if(rot == 2) {
-      //Pos = RotateY(Pos, 0.01f);
-      float[] newPos = {Pos[2], Pos[1], Pos[0], 1};
-      Pos = RotateX(newPos, 0.01f);
-      px[i] = Pos[0];
-      py[i] = Pos[1];
-      pz[i] = Pos[2];
-    } else if(rot == -2) {
-      Pos = RotateY(Pos, -0.01f);
-      px[i] = Pos[0];
-      py[i] = Pos[1];
-      pz[i] = Pos[2];
-    } else if(rot == 3) {
-      Pos = RotateZ(Pos, 0.01f);
-      px[i] = Pos[0];
-      py[i] = Pos[1];
-      pz[i] = Pos[2];
-    } else if(rot == -3) {
-      Pos = RotateZ(Pos, -0.01f);
-      px[i] = Pos[0];
-      py[i] = Pos[1];
-      pz[i] = Pos[2];
-    }*/
   }
 }
 
 //カメラクラスの初期化
 //カメラ側の回転も実装したい
 drawfromCam Camera = new drawfromCam(5.0f, 0f, 0f, 2f, 2f, 2f);
-
-/*
-float[] px = new float[] {1.0, 1.0, 1.0, 1.0, -1.0,  -1.0, -1.0, -1.0};
-float[] py = new float[] {1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, -1.0};
-float[] pz = new float[] {1.0, -1.0, 1.0, -1.0, 1.0, -1.0, 1.0, -1.0};
-*/
-
 
 void setup() {
   size(600, 600);
@@ -317,9 +239,6 @@ void draw() {
 void keyReleased() {
    if(key == 'g') {
       for(int i = 0; i < 8; i++) {
-        //print("x: " + px[i]);
-        //print("y: " + py[i]);
-        //println("z: " + pz[i]);
         print("x: " + dots[i][0]);
         print("y: " + dots[i][1]);
         println("z: " + dots[i][2]);
