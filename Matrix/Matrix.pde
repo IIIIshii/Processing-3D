@@ -45,8 +45,8 @@ class drawfromCam {
     PosReturn[0] = (PosReturn[0] * 300 / (w / 2)) + 300;
     PosReturn[1] = (PosReturn[1] * 300 / (h / 2)) + 300;*/
     
-    PosReturn[0] = (l * Pos[0] / (r - Pos[2])) * 300 / (w / 2) + 300;
-    PosReturn[1] = (l * Pos[1] / (r - Pos[2])) * 300 / (h / 2) + 300;
+    PosReturn[0] = (l * Pos[0] / (r + Pos[2])) * 300 / (w / 2) + 300;
+    PosReturn[1] = (l * Pos[1] / (r + Pos[2])) * 300 / (h / 2) + 300;
     
     return PosReturn;
   }
