@@ -7,30 +7,38 @@ private float[] Og = {0, 0, 0};
 private float[] gtheta = {0, 0, 0};
 private float[][] gPoints =  {{15, 0, 0}, {-15, 0, 0}, {0, 0, 15}, {0, 0, -15}};
 private String[] gPointsColor = {"000000"};
-private int[][] gsurf = {{0, 1, 2, 3}};
+private int[][] gsurf = {{0, 2, 1, 3}};
 private String[] gsurfColor = {"000000"};
-Object ground = new Object(Og, gtheta, gPoints, gPointsColor, gsurf, gsurfColor);
+object ground = new object(Og, gtheta, gPoints, gPointsColor, gsurf, gsurfColor);
 
-
+//直方体
+private float[] Ob = {0, -3, 0};
+private float[] btheta = {0, 0, 0};
+private float[][] bPoints =  {{4 + 2, 0, 4 + 2}, {4 + -2, 0, 4 + 2}, {4 + -2, 0, 4 + -2}, {4 + 2, 0, 4 + -2}, {4 + 2, -6, 4 + 2}, {4 + -2, -6, 4 + 2}, {4 + -2, -6, 4 + -2}, {4 + 2, -6, 4 + -2}};
+private String[] bPointsColor = {"00ffff"};
+private int[][] bsurf = {{0, 1, 2, 3}, {4, 5, 6, 7}};
+private String[] bsurfColor = {"ff00ff"};
+object block = new object(Ob, btheta, bPoints, bPointsColor, bsurf, bsurfColor);
 
 //プレーヤー
-private float[] Op = {0, -10, 0};
+private float[] Op = {0, -15, 0};
 private float[] ptheta = {0, 0, 0};
-private float[][] pPoints =  {{5, 0, 0}, {-5, 0, 0}, {0, 0, 5}, {0, 0, -5}, {5, -10, 0}, {-5, -10, 0}, {0, -10, 5}, {0, -10, -5}};
+private float[][] pPoints =  {{5, 5, 0}, {-5, 5, 0}, {0, 5, 5}, {0, 5, -5}, {5, -5, 0}, {-5, -5, 0}, {0, -5, 5}, {0, -5, -5}};
 private String[] pPointsColor = {"000000"};
-private int[][] psurf = {{0, 1, 2, 3}};
-private String[] psurfColor = {"000000"};
-Object Player = new Object(Op, ptheta, pPoints, pPointsColor, psurf, psurfColor);
+private int[][] psurf = {{0, 3, 1, 2}, {4, 7, 5, 6}};
+private String[] psurfColor = {"00ff00"};
+object Player = new object(Op, ptheta, pPoints, pPointsColor, psurf, psurfColor);
 
 
 float[] Vcalc(float[] A, float[] B, float C) {
+  float[] D = new float[A.length];
   if(A.length != B.length) {
     println("Err in Vcalc");
   }
   for(int i = 0; i < A.length; i++) {
-    A[i] += C * B[i];
+    D[i] += A[i] + C * B[i];
   }
-  return A;
+  return D;
 }
 
 
