@@ -1,3 +1,4 @@
+
 //各オブジェクトのインスタンスを生成
 
 //線を引くやつも実装する
@@ -30,34 +31,16 @@ private String[] psurfColor = {"00ff00"};
 object Player = new object(Op, ptheta, pPoints, pPointsColor, psurf, psurfColor);
 
 
-float[] Vcalc(float[] A, float[] B, float C) {
-  float[] D = new float[A.length];
-  if(A.length != B.length) {
-    println("Err in Vcalc");
-  }
-  for(int i = 0; i < A.length; i++) {
-    D[i] += A[i] + C * B[i];
-  }
-  return D;
-}
+//ウサギ
+private float[] Ou = {0, -5, 0};
+private float[] utheta = {0, 0, 0};
+private float[][] uPoints =  {{3, 3, 0}, {-3, 3, 0}, {0, 3, 3}, {0, 3, -3}, {3, -3, 0}, {-3, -3, 0}, {0, -3, 3}, {0, -3, -3}};
+private String[] uPointsColor = {"000000"};
+private int[][] usurf = {{0, 3, 1, 2}, {4, 7, 5, 6}};
+private String[] usurfColor = {"00ff00"};
+object Usagi = new object(Ou, utheta, uPoints, uPointsColor, usurf, usurfColor);
 
 
 
-//8*4行列で点の座標を持つ
-//各列が(x, y, z, 1)
-//float[][] dots = new float[8][4];
-
-//回転の速さ
-//float rotv = 0.02f;
-
-
-
-
-//4×4行列を掛けて平行移動、回転
-//カメラは常に原点を向く
-//座標はすべて右手系
-//スクリーンは左上原点なのでdrawfromCameraで中心原点にする(y軸の向きは反転してるけどワールド座標系をそれに合わせることで対応)
-//ワールド座標系は立方体の中心が原点になるようにする
-
-
-//color tes = color(#000000, 125);
+//描画するもののリスト
+object[] objectlist = {ground, Player, block, Usagi};
